@@ -1,11 +1,12 @@
 library(argparser)
 library(readr)
+library(dplyr)
 
 args <- 
   argparser::arg_parser("parse command line arguments to Rscript") |>
-  add_argument(arg = "--input", help = "path to sample", default = "data/sti_1.csv") |> 
-  add_argument(arg = "--nrow", help = "number of columns in which values should be orginised", default = 4) |> 
-  add_argument(arg = "--output", help = "path to the output", default = "results/wrangled/sti_1.csv") |> 
+  add_argument(arg = "--input", help = "[INPUT] path to sample", default = "data/sti_1.csv") |> 
+  add_argument(arg = "--nrow", help = "[PARAM] number of columns in which values should be orginised", default = 4) |> 
+  add_argument(arg = "--output", help = "[OUTPUT] path to the output", default = "results/wrangled/sti_1.csv") |> 
   parse_args()
 
 df <- read_csv(args[["input"]])
