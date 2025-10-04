@@ -1,5 +1,6 @@
 data/
 .snakemake/
+results/
 # PYTHON #
 # Byte-compiled / optimized / DLL files
 __pycache__/
