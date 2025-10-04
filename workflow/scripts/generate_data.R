@@ -1,19 +1,22 @@
 library(tidyverse)
+library(argparser)
 
-set.seed(1234567)
-sz <- 8
-lengt <- sample(x = 1:20, size = sz, replace = T) |> set_names(nm = paste0("sti_", seq_len(sz)))
+args <- 
+  argparser::arg_parser("parse command line arguments to Rscript") |>
+  add_argument(arg = "--sample_metadata", help = "[INPUT] path to sample metadata", default = c("sti_1")) |> 
+  add_argument(arg = "--seed", help = "[PARAM] seed for random value generation", default = c("1234567")) |> 
+  add_argument(
+    arg = "--output", 
+    help = "[OUTPUT] path to sample", 
+    default = c(
+      "data/sti_1.csv"
+    )) |>
+  parse_args()
 
+set.seed(args[["seed"]])
+sz <- parse_number(args[["sample_metadata"]]) + 5
 
-dfs <- map(lengt, \(x) tibble(value = seq_len(x)))
+df <- tibble(value = seq_len(sz))
 
-iwalk(dfs, \(x,y) write_csv(x = x, file = fs::path("data", y, ext = "csv")))
-
-
-names(lengt)
-
-df <- tibble(study_index = names(lengt))
-
-write_csv(df, file = "config/sample_metadata.csv")
-
+write_csv(x = df, file = args[["output"]])
 

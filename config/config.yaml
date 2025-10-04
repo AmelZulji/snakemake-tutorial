@@ -1,0 +1,9 @@
+printshellcmds: True
+sample_metadata: "config/sample_metadata.csv"
+
+generate_data:
+  seed: 1234567
+wrangle:
+  nrow: 4
+plot:
+  color: "red"

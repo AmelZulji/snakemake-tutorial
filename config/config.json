@@ -1,7 +1,0 @@
-printshellcmds: True
-sample_metadata: config/sample_metadata.csv
-
-wrangle:
-  nrow: 4
-plot:
-  color: "red"

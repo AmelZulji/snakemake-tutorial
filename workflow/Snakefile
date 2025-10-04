@@ -1,0 +1,15 @@
+# check working example at 20250107 on git
+from snakemake.utils import min_version
+min_version("8.0")
+import pandas as pd
+
+configfile: "config/config.yaml"
+
+# input data
+samples = pd.read_csv(config["sample_metadata"])["study_index"].tolist()
+
+rule all:
+    input:
+        expand("data/{sample}.csv", sample=samples)
+
+include: "rules/generate_data.smk"
