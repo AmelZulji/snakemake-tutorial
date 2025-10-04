@@ -6,7 +6,7 @@ rule generate_data:
 	shell:
 		"""
 		Rscript workflow/scripts/generate_data.R \
-		--sample_metadata {wildcards.sample} \
+		--sample {wildcards.sample} \
 		--seed {params.seed} \
 		--output {output.output}
 		"""
