@@ -10,7 +10,7 @@ samples = pd.read_csv(config["sample_metadata"])["study_index"].tolist()
 
 rule all:
     input:
-        expand("data/{sample}.csv", sample=samples)
+        expand("results/plot/{sample}.png", sample=samples)
 
 rule generate_data:
     params:
@@ -19,3 +19,23 @@ rule generate_data:
         output="data/{sample}.csv"
     script: 
         "scripts/generate_data.R" 
+
+rule wrangle:
+    input:
+        input="data/{sample}.csv"
+    params:
+        nrow=config["wrangle"]["nrow"]
+    output:
+        output="results/wrangled/{sample}.csv"
+    script: 
+        "scripts/wrangle.R" 
+
+rule plot:
+    input:
+        input="results/wrangled/{sample}.csv"
+    params:
+        color=config["plot"]["color"]
+    output:
+        output="results/plot/{sample}.png"
+    script: 
+        "scripts/plot.R" 

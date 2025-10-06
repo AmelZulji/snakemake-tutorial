@@ -16,7 +16,7 @@ library(argparser)
 # snakemake <- list(sample = "sti_1", seed = 1234567, output = "data/sti_1.csv")
 
 set.seed(snakemake@params[["seed"]])
-sz <- parse_number(snakemake@wildcards[["sample"]]) + 5
+sz <- parse_number(snakemake@wildcards[["sample"]])
 
 df <- tibble(value = seq_len(sz))
 
