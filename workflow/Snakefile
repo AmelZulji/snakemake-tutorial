@@ -13,16 +13,9 @@ rule all:
         expand("data/{sample}.csv", sample=samples)
 
 rule generate_data:
-    input:
-        script="workflow/scripts/generate_data.R"
     params:
         seed=config["generate_data"]["seed"]
     output:
         output="data/{sample}.csv"
-    shell:
-        """
-		Rscript {input.script} \
-		--sample {wildcards.sample} \
-		--seed {params.seed} \
-		--output {output.output}
-		"""
+    script: 
+        "scripts/generate_data.R" 
