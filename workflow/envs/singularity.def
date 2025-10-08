@@ -1,0 +1,5 @@
+Bootstrap: docker
+From: rocker/r-ver:4.3.2
+
+%post
+install2.r --error --ncpus -8 tidyverse
